@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-
 import { Root } from './Root';
-
 import * as firebase from 'firebase';
 
 // Inicializar Firebase

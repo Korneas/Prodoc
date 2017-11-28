@@ -1,5 +1,9 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
+import Form from "./Form";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 export class Root extends React.Component<any,any>{
     
@@ -7,13 +11,14 @@ export class Root extends React.Component<any,any>{
     state = {
         projects: [],
         user:null,
-        nombre: 'Prueba'
+        nombre: 'Prueba',
+        fields: {}
     }
 
     getProjects() {
-        
     this.handleAuth = this.handleAuth.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.onChange = this.onChange.bind(this);
 
     }
     
@@ -43,12 +48,21 @@ export class Root extends React.Component<any,any>{
           .then(result => console.log(`${result.user.email} Ha iniciado sesión`),)
           .catch(error => console.log(`Error ${error.code}: ${error.message}`));
       }
-    
+      
       handleLogout(){
         firebase.auth().signOut()
         .then(result => console.log(`${result.user.email} Ha cerrado sesión`),)
         .catch(error => console.log(`Error ${error.code}: ${error.message}`));
       }
+
+      onChange(updatedValue){
+          this.setState({
+            fields: {
+              ...this.state.fields,
+              ...updatedValue
+            }
+          });
+      } 
 
       renderIntro(){
         return(
@@ -84,6 +98,7 @@ export class Root extends React.Component<any,any>{
           )
         }
       }
+    
 
     render(){        
         return <div className="App">
@@ -95,6 +110,18 @@ export class Root extends React.Component<any,any>{
         <div className='login container'>
           {this.renderLogin()}
         </div>
+        {/* <Form onChange={fields => this.onChange(fields)} /> */}
+
+        <MuiThemeProvider>
+
+
+            <RaisedButton label="Entrar con Google" onClick={this.handleAuth} />
+          {/* <Form/> */}
+
+          <p>ó</p>
+          <RaisedButton label="Entrar con Google" onClick={this.handleAuth} />
+
+        </MuiThemeProvider>
         <h1>{this.state.nombre}</h1>
       </div>
     }
