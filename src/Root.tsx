@@ -4,9 +4,6 @@ import { Home } from './home';
 import { MenuHome } from './menu_home';
 import { Login } from './login';
 import { CreateProject } from './create_project';
-import { Project } from './project';
-import { DocumentPrev } from './document_prev';
-import { Document } from './document';
 import * as firebase from 'firebase';
 
 export class Root extends React.Component<any, any>{
@@ -16,8 +13,7 @@ export class Root extends React.Component<any, any>{
         user: null,
         openMenu: false,
         openNotify: false,
-        addProject: false,
-        expoProject: -1
+        addProject: false
     }
 
     componentWillMount() {
@@ -68,12 +64,6 @@ export class Root extends React.Component<any, any>{
         });
     }
 
-    onViewProject = (actualProject) => {
-        this.setState({
-            expoProject: actualProject
-        });
-    }
-
     render() {
         //Si el usuario NO esta logueado
         if (!this.state.user) {
@@ -82,21 +72,18 @@ export class Root extends React.Component<any, any>{
             )
         } else {
             //Si esta logueado
-            if (this.state.expoProject == -1) {
-                return (
-                    <div className='main'>
-                        <BottomBar onOpenWindow={(getOpenMenu, getOpenNotify) => { this.setState({ openMenu: getOpenMenu, openNotify: getOpenNotify }); }} onCreateProject={this.onCreateProject} />
-                        <MenuHome move={this.state.openMenu} currentUser={this.state.user} currentProjects={this.state.projects} onLogOut={(cmd) => this.onLogOut(cmd)} />
-                        <Home moveRight={this.state.openMenu} moveLeft={this.state.openNotify} currentUser={this.state.user} currentProjects={this.state.projects} onProject={(num) => {this.onViewProject(num); console.log("Estoy en el proyecto: " + num)}}/>
+            return (
+                <div className='main'>
+                    <BottomBar onOpenWindow={(getOpenMenu, getOpenNotify) => { this.setState({ openMenu: getOpenMenu, openNotify: getOpenNotify }); }} onCreateProject={this.onCreateProject} />
+                    <MenuHome move={this.state.openMenu} currentUser={this.state.user} currentProjects={this.state.projects} onLogOut={(cmd) => this.onLogOut(cmd)} />
+                    <Home moveRight={this.state.openMenu} moveLeft={this.state.openNotify} currentUser={this.state.user} currentProjects={this.state.projects} />
 
-                        {this.state.addProject ? (
-                            <CreateProject creatingProject={this.state.addProject} />
-                        ) : null}
-                    </div>
-                )
-            } else {
-                return <Project  project={this.state.projects[this.state.expoProject]}/>;
-            }
+                    {this.state.addProject ? (
+                        <CreateProject creatingProject={this.state.addProject} />
+                    ) : null}
+
+                </div>
+            )
         }
     }
 }
