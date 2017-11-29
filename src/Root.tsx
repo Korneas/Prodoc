@@ -1,128 +1,102 @@
 import * as React from 'react';
+import { BottomBar } from './bottom_bar';
+import { Home } from './home';
+import { MenuHome } from './menu_home';
+import { Login } from './login';
+import { CreateProject } from './create_project';
+import { Project } from './project';
+import { DocumentPrev } from './document_prev';
+import { Document } from './document';
 import * as firebase from 'firebase';
-import Form from "./Form";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
-export class Root extends React.Component<any,any>{
-    
+export class Root extends React.Component<any, any>{
 
     state = {
         projects: [],
-        user:null,
-        nombre: 'Prueba',
-        fields: {}
+        user: null,
+        openMenu: false,
+        openNotify: false,
+        addProject: false,
+        expoProject: -1
     }
 
-    getProjects() {
-    this.handleAuth = this.handleAuth.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-    this.onChange = this.onChange.bind(this);
-
-    }
-    
-    componentWillMount(){
-        //Sincronizacion con autenticacion
-        firebase.auth().onAuthStateChanged(user => {
-            console.log('Ingreso al usuario');
-            this.setState({ user });
-          });
-          
-          //Sincronizacion con realtime database
-      const rootRef = firebase.database().ref();
-      const nombreRef = rootRef.child('nombre');
-      
-      nombreRef.on('value', snap => {
-        this.setState({
-          nombre: snap.val()
-        });
-      });
-
-    this.getProjects();
-    }
-
-    handleAuth(){
-        const proveedorGoogle = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(proveedorGoogle)
-          .then(result => console.log(`${result.user.email} Ha iniciado sesión`),)
-          .catch(error => console.log(`Error ${error.code}: ${error.message}`));
-      }
-      
-      handleLogout(){
-        firebase.auth().signOut()
-        .then(result => console.log(`${result.user.email} Ha cerrado sesión`),)
-        .catch(error => console.log(`Error ${error.code}: ${error.message}`));
-      }
-
-      onChange(updatedValue){
-          this.setState({
-            fields: {
-              ...this.state.fields,
-              ...updatedValue
-            }
-          });
-      } 
-
-      renderIntro(){
-        return(
-          <div className='banner'>
-            <div id='container'>
-              <h1 className='titleHeader'>Notes</h1>
-              <h4 className='subHeader'>Hola, {this.state.user.displayName}</h4>
-              <img width='100' src={this.state.user.photoURL} alt={this.state.user.displayName}/>
-              <br/>
-              <button className='logoutButton' onClick={this.handleLogout}>Salir</button>
-            </div>
-          </div>
-        )
-      }
-
-      renderLogin(){
-        //Si el usuario NO esta logueado
-        if(!this.state.user){
-          return(
-            <div className='landing'>
-            <div id='container'>
-              <h4 className='subHeader'>Note, la aplicación para agilizar tu vida.</h4>
-              <button className='loginButton' onClick={this.handleAuth}>Empezar</button>
-            </div>
-          </div>
-          );
-        }else{
-          //Si esta logueado
-          return(
-            <div className='main'>
-                {this.renderIntro()}          
-            </div>
-          )
+    componentWillMount() {
+        if (localStorage.getItem('user')) {
+            this.setState({
+                user: JSON.parse(localStorage.getItem('user')),
+                projects: JSON.parse(localStorage.getItem('projects'))
+            });
         }
-      }
-    
+    }
 
-    render(){        
-        return <div className="App">
-        <header className="App-header">
-            
-          <h1 className="App-title">Bienvenido a Prodoc</h1>
-        </header>
+    renderInicio() {
+        return (
+            <div className='banner'>
+                <div id='container'>
+                    <h4 className='subHeader'>Hola, {this.state.user.displayName}</h4>
+                    <img width='100' src={this.state.user.photoURL} alt={this.state.user.displayName} />
+                    <br />
+                </div>
+            </div>
+        )
+    }
 
-        <div className='login container'>
-          {this.renderLogin()}
-        </div>
-        {/* <Form onChange={fields => this.onChange(fields)} /> */}
+    setData(user, projects) {
+        this.setState({
+            user: user,
+            projects: projects
+        });
 
-        <MuiThemeProvider>
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('projects', JSON.stringify(projects));
+    }
 
+    onLogOut(cmd) {
+        if (cmd.includes('logout')) {
+            this.setState({
+                user: null,
+                projects: [],
+                openMenu: false
+            });
+            localStorage.clear();
+        }
+    }
 
-            <RaisedButton label="Entrar con Google" onClick={this.handleAuth} />
-          {/* <Form/> */}
+    onCreateProject = (addProject) => {
+        this.setState({
+            addProject: addProject
+        });
+    }
 
-          <p>ó</p>
-          <RaisedButton label="Entrar con Google" onClick={this.handleAuth} />
+    onViewProject = (actualProject) => {
+        this.setState({
+            expoProject: actualProject
+        });
+    }
 
-        </MuiThemeProvider>
-        <h1>{this.state.nombre}</h1>
-      </div>
+    render() {
+        //Si el usuario NO esta logueado
+        if (!this.state.user) {
+            return (
+                <Login setData={(u, p) => this.setData(u, p)} />
+            )
+        } else {
+            //Si esta logueado
+            if (this.state.expoProject == -1) {
+                return (
+                    <div className='main'>
+                        <BottomBar onOpenWindow={(getOpenMenu, getOpenNotify) => { this.setState({ openMenu: getOpenMenu, openNotify: getOpenNotify }); }} onCreateProject={this.onCreateProject} />
+                        <MenuHome move={this.state.openMenu} currentUser={this.state.user} currentProjects={this.state.projects} onLogOut={(cmd) => this.onLogOut(cmd)} />
+                        <Home moveRight={this.state.openMenu} moveLeft={this.state.openNotify} currentUser={this.state.user} currentProjects={this.state.projects} onProject={(num) => {this.onViewProject(num); console.log("Estoy en el proyecto: " + num)}}/>
+
+                        {this.state.addProject ? (
+                            <CreateProject creatingProject={this.state.addProject} />
+                        ) : null}
+                    </div>
+                )
+            } else {
+                return <Project  project={this.state.projects[this.state.expoProject]}/>;
+            }
+        }
     }
 }

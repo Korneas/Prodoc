@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#bottomBar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 11vh;
+    z-index: 999;
+    /* box-shadow: 0px 5px 50px #ddd; */
+}
+
+.icon-container {
+    width: 33.33%;
+    height: 10vh;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+}
+
+#main{
+    background-color: #FBFBFB;
+}
+
+.icon-bottombar {
+    padding: 18px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -45%);
+    fill: #a7a7a7;
+    transition: all .2s ease;
+    margin: 0;
+}
+
+#bottomBar .tabs {
+    display: none;
+}
+
+#bottomBar .icon-bottombar:hover {
+    fill: #2c7cff;
+}
+
+#home {
+    background-color: #fbfbfb;
+    width: 100%;
+    height: 100vh;
+    background-image: url(img/fondoHome.png);
+    background-size: cover;
+}
+
+#homeBar {
+    background-color: #fff;
+    box-shadow: 0px 5px 50px #ddd;
+    font-family: 'Dosis', sans-serif;
+    height: 12vh;
+    padding: 15px;
+    padding-left: 20px;
+    line-height: 0;
+    position: relative;
+}
+
+#homeBar .profilePic {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+}
+
+#homeBar .homeBarInfo {
+    display: inline-block;
+    left: 85px;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+}
+
+#homeBar .homeBarInfo h2 {
+    font-weight: 700;
+    font-size: 1.5em;
+    color: #4c4c4c;
+    display: block;
+    margin-top: 1px;
+}
+
+#homeBar .homeBarInfo #numberOfProjects {
+    color: #a7a7a7;
+    font-weight: 400;
+    display: block;
+}
+
+.btnLogin {
+    display: inline-block;
+    font-family: 'Dosis', sans-serif;
+    *display: inline;
+    *zoom: 1;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    background-color: #f5f5f5;
+}
+
+.btnLogin:hover,
+.btnLogin:active,
+.btnLogin.active,
+.btnLogin.disabled,
+.btnLogin[disabled] {
+    background-color: #e6e6e6;
+}
+
+.btnLogin-large {
+    padding: 9px 14px;
+    font-size: 15px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.btnLogin:hover {
+    color: #333333;
+    text-decoration: none;
+    background-color: #e6e6e6;
+    background-position: 0 -15px;
+    -webkit-transition: background-position 0.1s linear;
+    -moz-transition: background-position 0.1s linear;
+    -ms-transition: background-position 0.1s linear;
+    -o-transition: background-position 0.1s linear;
+    transition: background-position 0.1s linear;
+}
+
+.btnLogin-primary,
+.btnLogin-primary:hover {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+}
+
+.btnLogin-primary.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.btnLogin-primary {
+    background-color: #75aa8b;
+    background-repeat: repeat-x;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr=#cdf24d, endColorstr=#bae240, GradientType=0);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0px 10px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    border: none;
+    font-size: 17pt;
+    border-radius: 20px;
+}
+
+.btnLogin-primary:hover,
+.btnLogin-primary:active,
+.btnLogin-primary.active,
+.btnLogin-primary.disabled,
+.btnLogin-primary[disabled] {
+    filter: none;
+    background-color: #658988;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0px 10px rgba(0, 0, 0, 0.4);
+    transition: .3s;
+}
+
+.btnLogin-block {
+    width: 100%;
+    display: block;
+    border: none;
+}
+
+#bodyLogin {
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background: #FAFAFA;
+    background-image: url(img/fondo.png);
+    background-size: cover;
+}
+
+
+.landing{
+    background-image: url(img/fondorRegistro.png);
+    background-size: cover;
+}
+
+.login {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width: 300px;
+    height: 300px;
+    ]
+}
+
+.login h1 {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.login input {
+    width: 100%;
+    font-family: 'Dosis', sans-serif;
+    margin-bottom: 10px;
+    background: white;
+    border: none;
+    outline: none;
+    padding: 5px;
+    color: gray;
+    border: none;
+    font-size: 17pt;
+    border-radius: 20px;
+    transition: 1s;
+    text-align: center;
+}
+
+.login input:focus {
+    background-color: white;
+    transition: 1s;
+    color: #092756;
+    box-shadow: none;
+}
+
+.login .registro,
+.login .registro:active,
+.login.registro.active,
+.login .registro:disabled {
+    text-decoration: none;
+    color: #0f7dfd;
+}
+
+.registro:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.login .logo {
+    margin: auto;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 15px 50px;
+}
+
+.login .subTexto {
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    font-size: 14pt;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+
+
+.login .subHeader {
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.login .registro .subHeader {
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    padding: 20px 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0ox;
+
+}
+
+ p{
+    text-align: center;
+    font-weight: bold;
+}
+
+.registro{
+    text-align: center;
+}
+
+.preImagen{
+    border-radius: 8px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.cargarFotoUsuario{
+    border-width: 1px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100px;
+}
+
+.overCargarFoto{
+    border-width: 2px;
+    border: 2px solid gray;
+}

@@ -1,0 +1,230 @@
+#project{
+   
+}
+
+#project-header{
+    position: fixed;
+    height: auto;
+    top: 0;
+    left: 0;
+    background: white;
+    box-shadow: 0px -5px 50px #ddd;
+}
+
+#project-bar{
+    position: fixed;
+    height: 10vh;
+    bottom: 0;
+    left: 0;
+    padding-top: 2%;
+    background: white;
+    box-shadow: 0px -5px 50px #ddd;
+}
+/*=========================================*/
+#project-bar button{
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    outline: none !important;
+}
+
+#project-header button{
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    outline: none !important;
+    left: 0;
+}
+
+.back{
+    padding: 2%;
+    fill: #a7a7a7;
+    width: 30px;
+}
+.group{
+    padding: 2%;
+    fill: #a7a7a7;
+    width: 50px;
+}
+
+.upload{
+    padding: 2%;
+    fill: #a7a7a7;
+    width: 50px;
+}
+
+.info{
+    padding: 2%;
+    fill: #a7a7a7;
+    width: 50px;
+}
+
+/*=========================================*/
+
+#project-header h1{
+    text-align: center;
+}
+
+#documentos{
+    margin-bottom: 25%;
+}
+
+#filter-type{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 10px 15px;
+	height: 40px;
+    color: #7f7a7d;
+    font-weight: lighter;
+    font-size: 0.9em;
+	cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#filter-type[value]{
+    
+    text-align: center;
+}
+
+option {
+	background-color: white;
+	color: gray;
+	width: 20%;
+	padding: 5px 5px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.conteiner-document{
+    padding: 5%;
+    margin: 2% 1% 1% 1%;
+    background: white;
+    height: auto;
+    border: solid 1px  #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.conteiner-document .date{
+    text-align: right;
+}
+
+#no-more-project{
+    margin-top: 5%;
+    text-align: center;
+}
+/*================   Estilo de la pantalla de los editores =======================*/
+
+#infoEditores{
+    margin-top: 30%;
+    background: white;
+    padding: 2%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 25%;
+}
+
+#infoEditores h1{
+    text-align: center;
+    margin-bottom: 4%;
+}
+#infoEditores p{
+    padding: 2%;
+}
+#infoEditores img{
+    
+}
+#infoEditores ul{
+    display: inline-block;
+    
+}
+
+#infoEditores li{
+  display: inline-block;
+  list-style-type: none;
+  margin-right: 1%;
+  color: #2c7cff;
+   
+}
+
+/*================   Estilo de la pantalla de info =======================*/
+
+#infoProject{
+    margin-top: 30%;
+    background: white;
+    padding: 2%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 25%;
+}
+
+#infoProject h1{
+    text-align: center;
+    margin-bottom: 4%;
+}
+#infoProject p{
+    padding: 2%;
+}
+#infoProject img{
+    
+}
+#infoProject ul{
+    display: inline-block;
+    
+}
+
+#infoProject li{
+  display: inline-block;
+  list-style-type: none;
+  margin-right: 1%;
+  color: #2c7cff;
+   
+}
+
+#nombres-docs li{
+    display: block;
+}
+/*==============================================================*/
+/*-------------------------------------*/
+
+@media only screen and (max-width: 700px) {
+     #documentos{
+        margin-top:23%;
+    }
+    #filter-type{
+        margin-left:8.33%;
+    }
+}
+
+@media only screen and (min-width: 701px) and (max-width: 1199px) {
+     #filter-type{
+        margin-left:25%;
+    }
+   #documentos{
+        margin-top:15%;
+        margin-left:25%;
+    }
+   
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1699px) {
+    #filter-type{
+        margin-left:33.33%;
+    }
+ #documentos{
+        margin-top:8%;
+        margin-left:33.33%;
+    }
+}
+
+@media only screen and (min-width: 1700px) {
+    #filter-type{
+        margin-left:33.33%;
+    }
+    #documentos{
+        margin-top:1%;
+        margin-left:33.33%;
+    }
+}
